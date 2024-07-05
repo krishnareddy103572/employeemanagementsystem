@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Employee List</title>
+<link rel="stylesheet" th:href="@{/resources/css/styles.css}" />
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.23/jspdf.plugin.autotable.min.js"></script>
+<script th:src="@{/resources/js/scripts.js}" defer></script>
+</head>
+<body>
+	<header class="site-header">
+		<div class="site-identity">
+			<a href="/"><img
+				src="https://upload.wikimedia.org/wikipedia/commons/8/82/Innova%E2%84%A2.jpg"
+				alt="Company Logo" style="height: 50px;"></a>
+		</div>
+		<nav class="site-navigation">
+			<select id="downloadSelector" class="button download">
+				<option value="" disabled selected>Download</option>
+				<option value="excel">Excel</option>
+				<option value="pdf">PDF</option>
+				<option value="csv">CSV</option>
+			</select>
+		</nav>
+	</header>
+
+	<!-- Add this inside your <body> tag where you want the menu button -->
+	<div class="dropdown">
+		<div class="menu-icon-container">
+			<div class="menu-bar menu-bar1"></div>
+			<div class="menu-bar menu-bar2"></div>
+			<div class="menu-bar menu-bar3"></div>
+		</div>
+		<div id="myDropdown" class="dropdown-content">
+			<a href="/home/employee/add" th:href="@{/home/employee/add}">Add
+				New Employee</a> <a href="/apply-id" th:href="@{/apply-id}">Apply
+				for New ID Card</a> <a href="/id-status" th:href="@{/id-status}">ID
+				Card Status</a>
+		</div>
+	</div>
+
+	<div class="header-container">
+		<h1>Employee List</h1>
+		<div class="search-container">
+			<input type="text" id="searchInput" placeholder="Search Employees"
+				name="keyword" />
+			<button type="button" class="button search" onclick="searchTable()">Search</button>
+		</div>
+	</div>
+
+	<table id="employeeTable">
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Work Email</th>
+				<th>Personal Email</th>
+				<th>Primary Phone</th>
+				<th>Alternate Phone</th>
+				<th>Present Address</th>
+				<th>Permanent Address</th>
+				<th>Department</th>
+				<th>Location</th>
+				<th>Gender</th>
+				<th>Edit</th>
+				<th>Delete</th>
+			</tr>
+		</thead>
+		<tbody th:each="emp : ${employees}">
+			<tr>
+				<td th:text="${emp.employeeID}"></td>
+				<td th:text="${emp.firstName}"></td>
+				<td th:text="${emp.lastName}"></td>
+				<td
+					th:text="${emp.emails.?[emailType == 'Work'].![emailAddress].size() > 0 ? emp.emails.?[emailType == 'Work'].![emailAddress].get(0) : 'N/A'}"></td>
+				<td
+					th:text="${emp.emails.?[emailType == 'Personal'].![emailAddress].size() > 0 ? emp.emails.?[emailType == 'Personal'].![emailAddress].get(0) : 'N/A'}"></td>
+				<td
+					th:text="${emp.phones.?[phoneType == 'Primary'].size() > 0 ? ('+' + emp.phones.?[phoneType == 'Primary'].get(0).countryCode + ' ' + emp.phones.?[phoneType == 'Primary'].get(0).phoneNumber) : 'N/A'}"></td>
+				<td
+					th:text="${emp.phones.?[phoneType == 'Alternate'].size() > 0 ? ('+' + emp.phones.?[phoneType == 'Alternate'].get(0).countryCode + ' ' + emp.phones.?[phoneType == 'Alternate'].get(0).phoneNumber) : 'N/A'}"></td>
+				<td
+					th:text="${emp.addresses.?[addressType == 'Present'].size() > 0 ? (emp.addresses.?[addressType == 'Present'].get(0).addressLine1 + ', ' + emp.addresses.?[addressType == 'Present'].get(0).city + ', ' + emp.addresses.?[addressType == 'Present'].get(0).state + ', ' + emp.addresses.?[addressType == 'Present'].get(0).country) : 'N/A'}"></td>
+				<td
+					th:text="${emp.addresses.?[addressType == 'Permanent'].size() > 0 ? (emp.addresses.?[addressType == 'Permanent'].get(0).addressLine1 + ', ' + emp.addresses.?[addressType == 'Permanent'].get(0).city + ', ' + emp.addresses.?[addressType == 'Permanent'].get(0).state + ', ' + emp.addresses.?[addressType == 'Permanent'].get(0).country) : 'N/A'}"></td>
+				<td th:text="${emp.department}"></td>
+				<td th:text="${emp.location}"></td>
+				<td th:text="${emp.gender}"></td>
+				<td><a
+					th:href="@{/home/employee/edit/{id}(id=${emp.employeeID})}">Edit</a></td>
+				<td><a
+					th:href="@{/home/employee/delete/{id}(id=${emp.employeeID})}">Delete</a></td>
+			</tr>
+		</tbody>
+	</table>
+	<div id="pagination" class="pagenumbers"></div>
+</body>
+</html>

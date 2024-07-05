@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Employee Email Information</title>
+<link rel="stylesheet" th:href="@{/resources/css/addEmployeestyle.css}" />
+</head>
+<body>
+	<!-- Company Logo Header -->
+	<header>
+		<div class="site-identity">
+			<a href="stylesheet" th:href="@{/resources/css/header-logo.css}">
+				<img
+				src="https://upload.wikimedia.org/wikipedia/commons/8/82/Innova%E2%84%A2.jpg"
+				alt="Company Logo" style="height: 50px;">
+			</a>
+		</div>
+	</header>
+
+	<div id="form-main">
+		<div id="form-div">
+			<form class="form" id="form1"
+				th:action="@{/home/employee/add/emails}" th:object="${employee}"
+				method="post">
+
+				<!-- Previous Button -->
+				<div class="submit">
+					<input type="button" value="Previous" id="button-blue"
+						onclick="history.back()" />
+				</div>
+
+				<h2>Personal Email</h2>
+
+				<input type="hidden" name="emailType" value="Personal" />
+
+				<!-- Personal Email Field -->
+				<p class="name">
+					<input name="personalEmailAddress" type="email"
+						class="feedback-input" placeholder="Personal Email Address"
+						id="personalEmailAddress" required />
+				</p>
+
+				<h2>Work Email</h2>
+
+				<input type="hidden" name="emailType" value="Work" />
+
+				<!-- Work Email Field -->
+				<p class="name">
+					<input name="workEmailAddress" type="email" class="feedback-input"
+						placeholder="Work Email Address" id="workEmailAddress" required />
+				</p>
+
+				<!-- Next Button -->
+				<div class="submit">
+					<input type="submit" value="Next" id="button-blue" />
+					<div class="ease"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Link to the JavaScript file -->
+	<script src="script.js"></script>
+</body>
+</html>

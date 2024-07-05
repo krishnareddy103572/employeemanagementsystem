@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Employee</title>
+<link rel="stylesheet" th:href="@{/resources/css/addEmployeestyle.css}" />
+</head>
+<body>
+	<div id="form-main">
+		<div id="form-div">
+			<form class="form" id="form1"
+				th:action="@{/home/employee/add/details}" th:object="${employee}"
+				method="post">
+				<p class="name">
+					<input name="employeeID" type="text" class="feedback-input"
+						   placeholder="Employee Id" id="employeeID" required />
+				</p>
+				<p class="name">
+					<input name="firstName" type="text" class="feedback-input"
+						placeholder="First Name" id="firstName" required />
+				</p>
+
+				<p class="name">
+					<input name="lastName" type="text" class="feedback-input"
+						placeholder="Last Name" id="lastName" required />
+				</p>
+				<p class="name">
+					<input name="email" type="text" class="feedback-input"
+						   placeholder="Email" id="email" required />
+				</p>
+
+				<p class="name">
+					<select name="gender" class="feedback-input" id="gender" required>
+						<option value="">Select Gender</option>
+						<option value="Male">Male</option>
+						<option value="Female">Female</option>
+						<option value="Other">Other</option>
+					</select>
+				</p>
+				<div class="submit">
+					<input type="submit" value="Next" id="button-blue" />
+					<div class="ease"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script src="script.js"></script>
+</body>
+</html>

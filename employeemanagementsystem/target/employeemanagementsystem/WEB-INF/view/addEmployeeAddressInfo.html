@@ -1,0 +1,116 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Employee Address Information</title>
+<link rel="stylesheet" th:href="@{/resources/css/addEmployeestyle.css}" />
+<link rel="stylesheet" th:href="@{/resources/css/header-logo.css}" />
+</head>
+<body>
+	<!-- Company Logo Header -->
+	<header>
+		<div class="site-identity">
+			<a href="/" th:href="@{/}"> <img
+				src="https://upload.wikimedia.org/wikipedia/commons/8/82/Innova%E2%84%A2.jpg"
+				alt="Company Logo" style="height: 50px;">
+			</a>
+		</div>
+	</header>
+
+	<div id="form-main">
+		<div id="form-div">
+			<form class="form" id="form1"
+				th:action="@{/home/employee/add/addresses}" th:object="${employee}"
+				method="post">
+
+				<!-- Previous Button -->
+				<div class="submit">
+					<input type="button" value="Previous" id="button-blue"
+						onclick="history.back()" />
+				</div>
+
+				<h2>Present Address</h2>
+
+				<input type="hidden" name="addressType" value="Present" />
+
+				<p class="name">
+					<input name="presentAddressLine1" type="text"
+						class="feedback-input" placeholder="Address Line 1"
+						id="presentAddressLine1" required />
+				</p>
+
+				<p class="name">
+					<input name="presentAddressLine2" type="text"
+						class="feedback-input" placeholder="Address Line 2"
+						id="presentAddressLine2" />
+				</p>
+
+				<p class="name">
+					<input name="presentCity" type="text" class="feedback-input"
+						placeholder="City" id="presentCity" required />
+				</p>
+
+				<p class="name">
+					<input name="presentState" type="text" class="feedback-input"
+						placeholder="State" id="presentState" />
+				</p>
+
+				<p class="name">
+					<input name="presentCountry" type="text" class="feedback-input"
+						placeholder="Country" id="presentCountry" required />
+				</p>
+
+				<p class="name">
+					<input name="presentPostalCode" type="text" class="feedback-input"
+						placeholder="Postal Code" id="presentPostalCode" />
+				</p>
+
+				<h2>Permanent Address</h2>
+
+				<input type="hidden" name="addressType" value="Permanent" />
+
+				<p class="name">
+					<input name="permanentAddressLine1" type="text"
+						class="feedback-input" placeholder="Address Line 1"
+						id="permanentAddressLine1" required />
+				</p>
+
+				<p class="name">
+					<input name="permanentAddressLine2" type="text"
+						class="feedback-input" placeholder="Address Line 2"
+						id="permanentAddressLine2" />
+				</p>
+
+				<p class="name">
+					<input name="permanentCity" type="text" class="feedback-input"
+						placeholder="City" id="permanentCity" required />
+				</p>
+
+				<p class="name">
+					<input name="permanentState" type="text" class="feedback-input"
+						placeholder="State" id="permanentState" />
+				</p>
+
+				<p class="name">
+					<input name="permanentCountry" type="text" class="feedback-input"
+						placeholder="Country" id="permanentCountry" required />
+				</p>
+
+				<p class="name">
+					<input name="permanentPostalCode" type="text"
+						class="feedback-input" placeholder="Postal Code"
+						id="permanentPostalCode" />
+				</p>
+				<!-- Next Button -->
+				<div class="submit">
+					<input type="submit" value="Next" id="button-blue" />
+					<div class="ease"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Link to the JavaScript file -->
+	<script src="script.js"></script>
+</body>
+</html>

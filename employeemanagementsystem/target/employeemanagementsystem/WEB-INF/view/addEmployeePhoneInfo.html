@@ -1,0 +1,76 @@
+
+
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add New Employee Phone Information</title>
+<link rel="stylesheet" th:href="@{/resources/css/addEmployeestyle.css}" />
+</head>
+<body>
+	<!-- Company Logo Header -->
+	<header>
+		<div class="site-identity">
+			<a href="/" th:href="@{/}"> <img
+				src="https://upload.wikimedia.org/wikipedia/commons/8/82/Innova%E2%84%A2.jpg"
+				alt="Company Logo" style="height: 50px;">
+			</a>
+		</div>
+	</header>
+
+	<div id="form-main">
+		<div id="form-div">
+			<form class="form" id="form1" th:action="@{/home/employee/save}"
+				th:object="${employee}" method="post">
+
+				<!-- Previous Button -->
+				<div class="submit">
+					<input type="button" value="Previous" id="button-blue"
+						onclick="history.back()" />
+				</div>
+
+				<h2>Primary Phone</h2>
+
+				<input type="hidden" name="phoneType" value="Primary" />
+
+				<p class="name">
+					<input name="primaryCountryCode" type="text" class="feedback-input"
+						placeholder="Country Code" id="primaryCountryCode" />
+				</p>
+
+				<p class="name">
+					<input name="primaryPhoneNumber" type="text" class="feedback-input"
+						placeholder="Primary Phone Number" id="primaryPhoneNumber"
+						required />
+				</p>
+
+				<h2>Alternate Phone</h2>
+
+				<input type="hidden" name="phoneType" value="Alternate" />
+
+				<p class="name">
+					<input name="alternateCountryCode" type="text"
+						class="feedback-input" placeholder="Country Code"
+						id="alternateCountryCode" />
+				</p>
+
+				<p class="name">
+					<input name="alternatePhoneNumber" type="text"
+						class="feedback-input" placeholder="Alternate Phone Number"
+						id="alternatePhoneNumber" />
+				</p>
+
+
+				<!-- Next Button -->
+				<div class="submit">
+					<input type="submit" value="Submit" id="button-blue" />
+					<div class="ease"></div>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Link to the JavaScript file -->
+	<script src="script.js"></script>
+</body>
+</html>

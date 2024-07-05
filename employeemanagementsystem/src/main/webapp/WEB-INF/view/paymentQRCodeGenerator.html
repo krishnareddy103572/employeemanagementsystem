@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment QR Code Generator</title>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js"></script>
+<style>
+body {
+	font-family: Arial, sans-serif;
+	text-align: center;
+	margin: 0;
+	padding: 20px;
+	background-color: #f4f4f4;
+}
+
+#qrCode {
+	margin-top: 20px;
+}
+
+button {
+	background-color: #007bff;
+	color: white;
+	border: none;
+	padding: 10px 20px;
+	font-size: 16px;
+	cursor: pointer;
+	border-radius: 5px;
+	transition: background-color 0.3s;
+}
+
+button:hover {
+	background-color: #0056b3;
+}
+</style>
+</head>
+<body>
+	<h2>Proceed to Payment</h2>
+	<p>Click the button below to generate your payment QR code.</p>
+	<button onclick="generateQR()">Generate Payment QR</button>
+	<div id="qrCode"></div>
+
+	<script>
+        function generateQR() {
+            var vpa = "9348119347@axl"; // Replace with your Virtual Payment Address
+            var amount = "10"; // Replace with the actual amount
+            var transactionRef = "T123456789"; // A unique transaction reference
+            var transactionInfo = `upi://pay?pa=${vpa}&pn=YourName&am=${amount}&tr=${transactionRef}&cu=INR`;
+
+            var qrCodeDiv = document.getElementById("qrCode");
+            qrCodeDiv.innerHTML = "";
+
+            try {
+                var qr = qrcode(0, 'M');
+                qr.addData(transactionInfo);
+                qr.make();
+                qrCodeDiv.innerHTML = qr.createImgTag();
+            } catch (error) {
+                console.error("Error generating QR code:", error);
+                qrCodeDiv.innerText = "Error generating QR code";
+            }
+        }
+    </script>
+</body>
+</html>

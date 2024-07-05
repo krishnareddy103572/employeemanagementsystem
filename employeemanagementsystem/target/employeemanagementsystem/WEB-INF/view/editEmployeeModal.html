@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Add/Edit Employee</title>
+</head>
+<body>
+	<h1>Add/Edit Employee</h1>
+	<form th:action="@{/home/employee/save}" th:object="${employee}"
+		method="post">
+		<div>
+			<label for="firstName">First Name:</label> <input type="text"
+				id="firstName" th:field="*{firstName}" required />
+		</div>
+		<div>
+			<label for="lastName">Last Name:</label> <input type="text"
+				id="lastName" th:field="*{lastName}" required />
+		</div>
+		<div>
+			<label for="department">Department:</label> <input type="text"
+				id="department" th:field="*{department}" />
+		</div>
+		<div>
+			<label for="location">Location:</label> <input type="text"
+				id="location" th:field="*{location}" />
+		</div>
+		<div>
+			<label for="gender">Gender:</label> <select id="gender"
+				th:field="*{gender}" required>
+				<option value="MALE">Male</option>
+				<option value="FEMALE">Female</option>
+				<option value="OTHER">Other</option>
+			</select>
+		</div>
+
+		<!-- Assuming primary email, phone, and address are simple fields for demonstration purposes -->
+		<!-- Adjust these fields based on your actual DTO structures -->
+		<div>
+			<label for="email">Primary Email:</label> <input type="email"
+				id="email" th:field="*{emails[0].emailAddress}" required />
+		</div>
+		<div>
+			<label for="phone">Primary Phone:</label> <input type="text"
+				id="phone" th:field="*{phones[0].phoneNumber}" required />
+		</div>
+		<div>
+			<label for="address">Primary Address:</label> <input type="text"
+				id="address" th:field="*{addresses[0].addressLine1}" required />
+		</div>
+
+		<button type="submit">Save</button>
+	</form>
+</body>
+</html>
